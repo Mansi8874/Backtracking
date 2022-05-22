@@ -1,0 +1,48 @@
+public class Solution {
+
+	public static boolean ratInAMaze(int maze[][]){
+
+		/*Your class should be named Solution. 
+		*Don't write main().
+	 	*Don't take input, it is passed as function argument.
+	 	*Don't print output.
+	 	*Taking input and printing output is handled automatically.
+		*/ 
+        int n=maze.length;
+        int path[][]=new int[n][n];
+        return ratInAMaze(maze,path,0,0);
+
+	}
+    public static boolean ratInAMaze(int maze[][],int [][] path,int i,int j){
+        int n=maze.length;
+        if(i<0 || i>=n || j<0 || j>=n){
+            return false;
+        }
+        if(path[i][j]==1){
+            return false;
+        }
+        if(maze[i][j]==0){
+            return false;
+        }
+        if(i==n-1 && j==n-1){
+            path[i][j]=1;
+            return true;
+        }
+        path[i][j]=1;
+        boolean ans1=ratInAMaze(maze,path,i+1,j);
+        if(ans1==true){
+            return ans1;
+        }
+        boolean ans2=ratInAMaze(maze,path,i,j+1);
+        if(ans2==true){
+            return ans2;
+        }
+        boolean ans3=ratInAMaze(maze,path,i-1,j);
+        if(ans3==true){
+            return ans3;
+        }
+        boolean ans4=ratInAMaze(maze,path,i,j-1);
+        return ans4;
+        
+    }
+}
